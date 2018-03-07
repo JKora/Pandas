@@ -462,7 +462,7 @@ age_anal_df = pd.DataFrame({"Purchase Count":age_demo["Price"].count(),
                             "Average Purchase Price" : age_demo["Price"].mean().map('${:.2f}'.format),
                             "Total Purchase Value" : age_demo["Price"].sum()})
 
-age_anal_df["Normalized Total"] = round(age_anal_df["Total Purchase Value"]/age_demo["SN"].nunique(),2)
+age_anal_df["Normalized Total"] = (age_anal_df["Total Purchase Value"]/age_demo["SN"].nunique()).map('${:.2f}'.format)
 age_anal_df["Total Purchase Value"]=age_anal_df["Total Purchase Value"].map('${:.2f}'.format)
 
 age_anal_df_org = age_anal_df[["Purchase Count", "Average Purchase Price", "Total Purchase Value", "Normalized Total"]]
@@ -509,56 +509,56 @@ age_anal_df_org
       <td>28</td>
       <td>$2.98</td>
       <td>$83.46</td>
-      <td>4.39</td>
+      <td>$4.39</td>
     </tr>
     <tr>
       <th>10-14</th>
       <td>35</td>
       <td>$2.77</td>
       <td>$96.95</td>
-      <td>4.22</td>
+      <td>$4.22</td>
     </tr>
     <tr>
       <th>15-19</th>
       <td>133</td>
       <td>$2.91</td>
       <td>$386.42</td>
-      <td>3.86</td>
+      <td>$3.86</td>
     </tr>
     <tr>
       <th>20-24</th>
       <td>336</td>
       <td>$2.91</td>
       <td>$978.77</td>
-      <td>3.78</td>
+      <td>$3.78</td>
     </tr>
     <tr>
       <th>25-29</th>
       <td>125</td>
       <td>$2.96</td>
       <td>$370.33</td>
-      <td>4.26</td>
+      <td>$4.26</td>
     </tr>
     <tr>
       <th>30-34</th>
       <td>64</td>
       <td>$3.08</td>
       <td>$197.25</td>
-      <td>4.20</td>
+      <td>$4.20</td>
     </tr>
     <tr>
       <th>35-39</th>
       <td>42</td>
       <td>$2.84</td>
       <td>$119.40</td>
-      <td>4.42</td>
+      <td>$4.42</td>
     </tr>
     <tr>
       <th>40+</th>
       <td>17</td>
       <td>$3.16</td>
       <td>$53.75</td>
-      <td>4.89</td>
+      <td>$4.89</td>
     </tr>
   </tbody>
 </table>
@@ -656,16 +656,16 @@ Item_df_sorted_org.head(5)
 ```python
 # **Most Popular Items**
 # group purchase data on Item Name and Item ID
-Item_demo = purch_data_df.groupby(["Item Name", "Item ID"])
+Item_demo = purch_data_df.groupby(["Item ID", "Item Name"])
 
 popular_item_df = pd.DataFrame({"Purchase Count": Item_demo["Item Name"].count(),
-                               "Total Purchase Value" : Item_demo["Price"].sum(),
-                               "Item Price" : Item_demo["Price"].sum()/Item_demo["Item Name"].count()})
+                               "Total Purchase Value" : Item_demo["Price"].sum().map('${:.2f}'.format),
+                               "Item Price" : (Item_demo["Price"].sum()/Item_demo["Item Name"].count()).map('${:.2f}'.format)})
+#set the columns in order 
+popular_item_df_arranged = popular_item_df[["Purchase Count", "Item Price", "Total Purchase Value"]]
 # sort the grouped data by Purchase Count in descending order and display the first 5 rows
-popular_item_df_sorted = popular_item_df.sort_values("Purchase Count", ascending=False)
+popular_item_df_sorted = popular_item_df_arranged.sort_values("Purchase Count", ascending=False)
 popular_item_df_sorted.head(5)
-
-
 
 ```
 
@@ -691,13 +691,13 @@ popular_item_df_sorted.head(5)
     <tr style="text-align: right;">
       <th></th>
       <th></th>
-      <th>Item Price</th>
       <th>Purchase Count</th>
+      <th>Item Price</th>
       <th>Total Purchase Value</th>
     </tr>
     <tr>
-      <th>Item Name</th>
       <th>Item ID</th>
+      <th>Item Name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -705,39 +705,39 @@ popular_item_df_sorted.head(5)
   </thead>
   <tbody>
     <tr>
-      <th>Betrayal, Whisper of Grieving Widows</th>
       <th>39</th>
-      <td>2.35</td>
+      <th>Betrayal, Whisper of Grieving Widows</th>
       <td>11</td>
-      <td>25.85</td>
+      <td>$2.35</td>
+      <td>$25.85</td>
     </tr>
     <tr>
-      <th>Arcane Gem</th>
       <th>84</th>
-      <td>2.23</td>
+      <th>Arcane Gem</th>
       <td>11</td>
-      <td>24.53</td>
+      <td>$2.23</td>
+      <td>$24.53</td>
     </tr>
     <tr>
-      <th>Retribution Axe</th>
-      <th>34</th>
-      <td>4.14</td>
-      <td>9</td>
-      <td>37.26</td>
-    </tr>
-    <tr>
-      <th>Trickster</th>
       <th>31</th>
-      <td>2.07</td>
+      <th>Trickster</th>
       <td>9</td>
-      <td>18.63</td>
+      <td>$2.07</td>
+      <td>$18.63</td>
     </tr>
     <tr>
-      <th>Serenity</th>
-      <th>13</th>
-      <td>1.49</td>
+      <th>175</th>
+      <th>Woeful Adamantite Claymore</th>
       <td>9</td>
-      <td>13.41</td>
+      <td>$1.24</td>
+      <td>$11.16</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <th>Serenity</th>
+      <td>9</td>
+      <td>$1.49</td>
+      <td>$13.41</td>
     </tr>
   </tbody>
 </table>
@@ -749,9 +749,9 @@ popular_item_df_sorted.head(5)
 ```python
 # **Most Profitable Items**
 
-profitable_item_df = popular_item_df.sort_values("Total Purchase Value", ascending = False)
+profitable_item_df = popular_item_df.sort_values("Item Price", ascending=False)
+profitable_item_df.arraged = profitable_item_df[["Purchase Count", "Item Price", "Total Purchase Value"]]
 profitable_item_df.head(5)
-
 ```
 
 
@@ -781,8 +781,8 @@ profitable_item_df.head(5)
       <th>Total Purchase Value</th>
     </tr>
     <tr>
-      <th>Item Name</th>
       <th>Item ID</th>
+      <th>Item Name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -790,39 +790,39 @@ profitable_item_df.head(5)
   </thead>
   <tbody>
     <tr>
-      <th>Retribution Axe</th>
-      <th>34</th>
-      <td>4.14</td>
-      <td>9</td>
-      <td>37.26</td>
-    </tr>
-    <tr>
-      <th>Spectral Diamond Doomblade</th>
-      <th>115</th>
-      <td>4.25</td>
-      <td>7</td>
-      <td>29.75</td>
-    </tr>
-    <tr>
-      <th>Orenmir</th>
       <th>32</th>
-      <td>4.95</td>
+      <th>Orenmir</th>
+      <td>$4.95</td>
       <td>6</td>
-      <td>29.70</td>
+      <td>$29.70</td>
     </tr>
     <tr>
-      <th>Singed Scalpel</th>
+      <th>177</th>
+      <th>Winterthorn, Defender of Shifting Worlds</th>
+      <td>$4.89</td>
+      <td>4</td>
+      <td>$19.56</td>
+    </tr>
+    <tr>
       <th>103</th>
-      <td>4.87</td>
+      <th>Singed Scalpel</th>
+      <td>$4.87</td>
       <td>6</td>
-      <td>29.22</td>
+      <td>$29.22</td>
     </tr>
     <tr>
-      <th>Splitter, Foe Of Subtlety</th>
-      <th>107</th>
-      <td>3.61</td>
-      <td>8</td>
-      <td>28.88</td>
+      <th>173</th>
+      <th>Stormfury Longsword</th>
+      <td>$4.83</td>
+      <td>5</td>
+      <td>$24.15</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <th>Fury</th>
+      <td>$4.82</td>
+      <td>4</td>
+      <td>$19.28</td>
     </tr>
   </tbody>
 </table>

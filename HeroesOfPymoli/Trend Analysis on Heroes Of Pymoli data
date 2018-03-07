@@ -1,0 +1,36 @@
+Three observable trends based on the data:
+
+Below are the three observations from the data in the file "purchase_data.json"
+
+    1) The player population is largely Males :
+        The gender demographics analysis clearly shows that close to 80% of players are male players.
+    2) And Most players fall in the age group of 20-24:
+        The age demographics analysis shows the number of players per age group.
+    3) The most popular items are necessarily not the most profitable items.
+        Looking at the data for the most Popular Item and Profitable Item tables, there are some items with item price higher than the popular items and even though they do not have the purchase count as much as the popular items, their total purchase value is higher than the total purchase value for the most popular item.
+        
+Some observations that I was unable to resolve or find a reason/solution:
+    1) grouping the data by Item Name, vs grouping the data by Item ID returns 2 different sets of data:
+        am unable to identify the cause of this discripency.  But my observation is based on the assumption that the Item ID and Item Name are unique to each other.  Unless that is not the case, grouping data by either of them should result in the same data set.
+
+    2) When identifying the "Most Profitable Item", i have first grouped the data by Item Name and Item Price, and then calculated the Total Purchase Counts per [Item Name, Item ID], and from there the Total Purchase value and Item Price.
+    now when sorting this data for most profitable item, sorted on column "Total Purchase Value" assuming it would return the highest Total Purchase Value in the table. Instead the returned values were neither the max or min.  Tired retrieving the max and min values from the Total Purchase Value column, but the values returned are definitely not true...how can i say this? Below are the first 5 rows when i sort the rows on Total Purchase Value (in descending order i.e. ascending = False)
+    
+Item ID	Item Name			      Item Price	Purchase Count	Total Purchase Value
+   170 	 Shadowsteel	          $1.98 	     5   	      $9.90
+    21	 Souleater	              $3.27 	     3  	      $9.81
+    37	 Shadow Strike,  	      $1.93 	     5  	      $9.65
+   127	 Heartseeker,	          $3.21 	     3  	      $9.63
+   120	 Agatha 	              $1.91 	     5  	      $9.55
+   
+    now instead of sorting the Item Data table on Total Purchase Value..I sorted them on "Item Price". The data returned in the first 5 rows is different than the above... 
+    Item ID  	Item Name		    		Item Price  	Purchase Count	Total Purchase Value
+    32  	     Orenmir	                $4.95        	6	            $29.70
+    177 	  Winterthorn,  	            $4.89       	4	            $19.56
+    103 	Singed Scalpel  	            $4.87       	6	            $29.22
+    173 	Stormfury Longsword 	        $4.83       	5	            $24.15
+    131 	     Fury                   	$4.82       	4	            $19.28
+    
+    Looking at the above data, I would consider the second table a good representation of the most profitable item...but then the question remains, why when sorting on Total Purchase Value doesn't bring up the data as shown in the second table, which is what i have expected.
+    
+        
