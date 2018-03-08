@@ -750,8 +750,8 @@ popular_item_df_sorted.head(5)
 # **Most Profitable Items**
 
 profitable_item_df = popular_item_df.sort_values("Item Price", ascending=False)
-profitable_item_df.arraged = profitable_item_df[["Purchase Count", "Item Price", "Total Purchase Value"]]
-profitable_item_df.head(5)
+profitable_item_df_arraged = profitable_item_df[["Purchase Count", "Item Price", "Total Purchase Value"]]
+profitable_item_df_arraged.head(5)
 ```
 
 
@@ -776,8 +776,8 @@ profitable_item_df.head(5)
     <tr style="text-align: right;">
       <th></th>
       <th></th>
-      <th>Item Price</th>
       <th>Purchase Count</th>
+      <th>Item Price</th>
       <th>Total Purchase Value</th>
     </tr>
     <tr>
@@ -792,36 +792,36 @@ profitable_item_df.head(5)
     <tr>
       <th>32</th>
       <th>Orenmir</th>
-      <td>$4.95</td>
       <td>6</td>
+      <td>$4.95</td>
       <td>$29.70</td>
     </tr>
     <tr>
       <th>177</th>
       <th>Winterthorn, Defender of Shifting Worlds</th>
-      <td>$4.89</td>
       <td>4</td>
+      <td>$4.89</td>
       <td>$19.56</td>
     </tr>
     <tr>
       <th>103</th>
       <th>Singed Scalpel</th>
-      <td>$4.87</td>
       <td>6</td>
+      <td>$4.87</td>
       <td>$29.22</td>
     </tr>
     <tr>
       <th>173</th>
       <th>Stormfury Longsword</th>
-      <td>$4.83</td>
       <td>5</td>
+      <td>$4.83</td>
       <td>$24.15</td>
     </tr>
     <tr>
       <th>131</th>
       <th>Fury</th>
-      <td>$4.82</td>
       <td>4</td>
+      <td>$4.82</td>
       <td>$19.28</td>
     </tr>
   </tbody>
